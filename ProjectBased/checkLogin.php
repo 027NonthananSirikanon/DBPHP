@@ -7,6 +7,8 @@
     //echo 'Hello CheckLogin!';
     $username = $_POST['username'];
     $password = $_POST['password'];
+    echo"username :".$username ."<br>";
+    echo"password :".$password ."<br>";
     
 
     //echo '<br>username: ' .$username;
@@ -24,30 +26,42 @@
 
     //4. Send sql to MySQl, get result back
     $result = $con->query($sql);
-
+    // print_r($result);
+    
     //5. Count result
     $count_row = mysqli_num_rows($result);
 
-    //6.Work with data
-    if($count_row !=0){
-        while($rs = $result->fetch_assoc()){
-            // echo "<br>User ID: " .  $rs["UserID"];
-            // echo "<br>Username: ". $rs["UserEmail"];
-            //header("location:profile.php?username=".$username);
-            $_SESSION['username'] = $username;
-            if(isset($_SESSION['cart'])){
-                header("location:cart2.php");
-            }else{
-                header("location:profile.php");
-            }
-            
-        }
-
+    if($count_row == 1){
+        // echo "found"
+        $rs = $result->fetch_assoc();
+        $_SESSION['username'] =$username;
+        header('Location:profile.php');
     }else{
-        //echo "Please check username and password";
-        header("location:login_form.php?error=1");
+        // echo "not found"
+        header('Location:loginfrom.php?error=1');
+
     }
 
-    $con->close();
+    //6.Work with data
+    // if($count_row !=0){
+    //     while($rs = $result->fetch_assoc()){
+    //         // echo "<br>User ID: " .  $rs["UserID"];
+    //         // echo "<br>Username: ". $rs["UserEmail"];
+    //         //header("location:profile.php?username=".$username);
+    //         $_SESSION['username'] = $username;
+    //         // if(isset($_SESSION['cart'])){
+    //         //     header("location:cart2.php");
+    //         // }else{
+    //         //     header("location:profile.php");
+    //         // }
+            
+    //     }
+
+    // }else{
+    //     //echo "Please check username and password";
+    //     // header("location:login_form.php?error=1");
+    // }
+
+    // $con->close();
 
 ?>
