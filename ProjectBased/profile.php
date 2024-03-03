@@ -5,7 +5,7 @@
         $username = $_SESSION['username'];
         
     
-        $sql = "select * from users where UserEmail = '".$username . "' and UserPassword= '".   $password ."'"; 
+        $sql = "select * from users where UserEmail = '{$username}'";
     
         $result = $con->query($sql);
        
@@ -45,7 +45,8 @@
             </div>
             <div class="col-lg-8">
                 <h2>Welcome : <?php echo $username; ?> </h2>
-                <p>Name:<?php echo $rs['UserFirstName']."".$rs['UserLastName']; ?> </p>
+                <p>Name:<?php echo $rs['UserFirstName'];?> </p>
+                <p>Surname:<?php echo $rs['UserLastName']; ?></p>
                 <p>Address:<?php echo $rs['UserAddress']; ?></p>
     <div class="d-grid gap-2 d-md-block">
      <a href="edituser.php"class="btn btn-primary" type="button">Editprofile</a>
